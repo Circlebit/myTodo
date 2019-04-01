@@ -24,6 +24,7 @@ Folgende Features müssen zu o.g. Termin lauffähig und getestet sein:
     - Ablaufdatum
     - Priorität
     - Projekt
+      - Container von Items - 1:n
     - Wiederholungsfrequenz
     - Wiederholung bis
     - Link/Notiz
@@ -35,6 +36,8 @@ Folgende Features müssen zu o.g. Termin lauffähig und getestet sein:
     - nach Fälligkeit (in den nächsten 7 Tagen)
     - nach Projekt
     - Wiederholung (ja/nein)
+- Ansicht: Item Details
+  - Daten des Items anzeigen und bearbeiten
 - Ansicht: Übersicht alle Projekte
 - Erinnerungen
   - Push-Notifications (alternativ Widget)

@@ -1,3 +1,5 @@
+Dies ist kein offizielles Dokument, nur vorläufige Notizen / schwebende Gedanken
+
 Arbeitspakete
  - [Vorbereitung] Einarbeitung JavaScript / React Native / Redux
  - [Vorbereitung] Entwicklungsumgebung aufsetzen
@@ -16,7 +18,9 @@ Arbeitspakete
  - [Erinnerungen] Einfach
  - [Erinnerungen] Wiederholung
 
-Definition of Done für Arbeitspaket:
- - Anforderung umgesetzt gemäß Lastenheft
+__Definition of Done__ für requests:
+ - Anforderung umgesetzt gemäß [Lastenheft](Lastenheft.md)
+ - Funktionalität getestet
  - Dokumentation:
+    - Beschreibung Klassen / Methoden ([JSDoc](http://usejsdoc.org/))
     - 
