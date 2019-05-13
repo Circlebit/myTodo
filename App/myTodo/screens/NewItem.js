@@ -40,11 +40,11 @@ const styles = StyleSheet.create({
 });
 
 class NewItem extends Component {
-    // state = {
-    //     id: this.id,
-    //     title: null,
-    //     date: '',
-    // };
+    state = {
+        id: this.id,
+        title: null,
+        date: '',
+    };
 
     render() {
         return (
