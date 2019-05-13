@@ -1,20 +1,12 @@
-import React from 'react';
+import React, { Component } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import ItemsList from './screens/ItemsList';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-export default class App extends React.Component {
-  render() {
-    return (
-        <ItemsList />
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const AppNavigator = createStackNavigator({
+  list: { screen: ItemsList },
 });
+
+const AppContainer = createAppContainer(AppNavigator);
+
+export default AppContainer;
