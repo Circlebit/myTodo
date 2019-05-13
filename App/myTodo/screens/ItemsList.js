@@ -10,7 +10,7 @@ class ItemsList extends Component {
     render() {
         return (
             <SafeAreaView style={GlobalStyles.droidSafeArea}>
-                <Text>Hallo Welt!</Text>
+                <Text>Hallo Welt!!!</Text>
             </SafeAreaView>
         );
     }
