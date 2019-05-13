@@ -9,7 +9,7 @@ class ItemsList extends Component {
     }
 
     handleAddEvent = () => {
-        this.props.navigation.navigate('list');
+        this.props.navigation.navigate('newItem');
     }
 
     render() {
