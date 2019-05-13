@@ -5,8 +5,18 @@ import NewItem from './screens/NewItem';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 const AppNavigator = createStackNavigator({
-  list: { screen: ItemsList },
-  newItem: { screen: NewItem },
+  list: { 
+    screen: ItemsList,
+    navigationOptions: () => ({
+      title: 'Meine Aufgaben',
+    }),
+   },
+  newItem: { 
+    screen: NewItem,
+    navigationOptions: () => ({
+      title: 'Neue Aufgabe',
+    }),
+  },
 });
 
 const AppContainer = createAppContainer(AppNavigator);

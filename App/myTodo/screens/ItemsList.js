@@ -4,9 +4,9 @@ import GlobalStyles from "../config/GlobalStyles";
 import ActionButton from 'react-native-action-button';
 
 class ItemsList extends Component {
-    state = {
-        allItems: []
-    }
+    // state = {
+    //     allItems: []
+    // }
 
     handleAddEvent = () => {
         this.props.navigation.navigate('newItem');
