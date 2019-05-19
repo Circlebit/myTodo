@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, SafeAreaView, StyleSheet } from "react-native";
+import { Text, SafeAreaView, StyleSheet, Button } from "react-native";
 import GlobalStyles from "../config/GlobalStyles";
 import ActionButton from 'react-native-action-button';
 

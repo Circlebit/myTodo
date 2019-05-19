@@ -2,19 +2,26 @@ import React, { Component } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import ItemsList from './screens/ItemsList';
 import NewItem from './screens/NewItem';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import ProjectsList from './screens/ProjectsList'
+import { createDrawerNavigator, createAppContainer } from 'react-navigation';
 
-const AppNavigator = createStackNavigator({
+const AppNavigator = createDrawerNavigator({
   list: { 
     screen: ItemsList,
     navigationOptions: () => ({
-      title: 'Meine Aufgaben',
+      drawerLabel: 'Meine Aufgaben',
     }),
    },
   newItem: { 
     screen: NewItem,
     navigationOptions: () => ({
-      title: 'Neue Aufgabe',
+      drawerLabel: 'Neue Aufgabe',
+    }),
+  },
+  projects: { 
+    screen: ProjectsList,
+    navigationOptions: () => ({
+      drawerLabel: 'Projekte',
     }),
   },
 });
