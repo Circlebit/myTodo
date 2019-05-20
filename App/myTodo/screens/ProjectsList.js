@@ -33,7 +33,7 @@ class ProjectsList extends Component {
                 <Text key="helloworld">Projekte!</Text>
             </SafeAreaView>,
             <ActionButton 
-                key="fab"
+                key="addProjectButton"
                 onPress={this.handleAddEvent}
                 buttonColor="rgba(231, 76, 60, 1)"
             />

@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 import ItemsList from './screens/ItemsList';
 import NewItem from './screens/NewItem';
 import ProjectsList from './screens/ProjectsList'
-import { createDrawerNavigator, createAppContainer, DrawerItems } from 'react-navigation';
+import { createDrawerNavigator, createStackNavigator, createAppContainer, DrawerItems } from 'react-navigation';
 import GlobalStyles from "./config/GlobalStyles";
 
 const CustomDrawerContentComponent = props => (
@@ -20,22 +20,45 @@ const NavigatorConfig = {
   drawerWidth: 200,
 }
 
+const itemsStack = createStackNavigator(
+  {
+    itemsList: { 
+      screen: ItemsList,
+      navigationOptions: () => ({
+        title: 'Meine Aufgaben',
+      }),
+    },
+    newItem: 
+    { 
+      screen: NewItem,
+      navigationOptions: () => ({
+        title: 'Neue Aufgabe...',
+      }),
+    }
+  }
+);
+
+const projectsStack = createStackNavigator(
+  {
+    itemsList: { 
+      screen: ProjectsList,
+      navigationOptions: () => ({
+        title: 'Meine Projekte',
+      }),
+    },
+  }
+);
+
 const AppNavigator = createDrawerNavigator(
   {
     list: {
-      screen: ItemsList,
+      screen: itemsStack,
       navigationOptions: () => ({
-        title: 'Meine Aufgaben'
+        drawerLabel: 'Aufgaben',
       }),
     },
-    // newItem: { 
-    //   screen: NewItem,
-    //   navigationOptions: () => ({
-    //     drawerLabel: 'Neue Aufgabe',
-    //   }),
-    // },
     projects: {
-      screen: ProjectsList,
+      screen: projectsStack,
       navigationOptions: () => ({
         drawerLabel: 'Projekte',
       }),

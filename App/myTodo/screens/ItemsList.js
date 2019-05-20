@@ -33,7 +33,7 @@ class ItemsList extends Component {
                 <Text key="helloworld">Hallo Welt!</Text>
             </SafeAreaView>,
             <ActionButton 
-                key="fab"
+                key="addItemButton"
                 onPress={this.handleAddEvent}
                 buttonColor="rgba(231, 76, 60, 1)"
             />
