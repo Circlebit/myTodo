@@ -2,23 +2,12 @@ import React, { Component } from "react";
 import { Text, SafeAreaView, StyleSheet, ScrollView, FlatList } from "react-native";
 import GlobalStyles from "../config/GlobalStyles";
 import ActionButton from 'react-native-action-button';
-import Datastore from 'react-native-local-mongodb';
-import ItemInList from '../components/ItemInList'
+import ListItem from '../components/ListItem'
 
 const styles = StyleSheet.create({
-    attribution: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      paddingVertical: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'rgba(0,0,0,0.5)',
-    },
     list: {
         flex: 1,
-        paddingTop: 20,
+        paddingTop: 3,
         backgroundColor: '#F3F3F3',
     },
   });
@@ -52,7 +41,7 @@ class ItemsList extends Component {
                 <FlatList 
                     style={styles.list}
                     data={this.state.allItems}
-                    renderItem={({item}) => <ItemInList item={item} />}
+                    renderItem={({item}) => <ListItem item={item} />}
                     key={({item}) => item.id}
                 />
             </SafeAreaView>,
