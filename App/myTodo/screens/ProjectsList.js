@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, SafeAreaView, StyleSheet, Button } from "react-native";
+import { Text, SafeAreaView, StyleSheet } from "react-native";
 import GlobalStyles from "../config/GlobalStyles";
 import ActionButton from 'react-native-action-button';
 
@@ -16,13 +16,13 @@ const styles = StyleSheet.create({
     },
   });
 
-class ItemsList extends Component {
+class ProjectsList extends Component {
     state = {
         allItems: []
     }
 
     handleAddEvent = () => {
-        this.props.navigation.navigate('newItem');
+        this.props.navigation.navigate('newProject');
     }
 
     render() {
@@ -30,10 +30,10 @@ class ItemsList extends Component {
             <SafeAreaView 
                 style={GlobalStyles.droidSafeArea}
                 key="safe">
-                <Text key="helloworld">Hallo Welt!</Text>
+                <Text key="helloworld">Projekte!</Text>
             </SafeAreaView>,
             <ActionButton 
-                key="addItemButton"
+                key="addProjectButton"
                 onPress={this.handleAddEvent}
                 buttonColor="rgba(231, 76, 60, 1)"
             />
@@ -41,4 +41,4 @@ class ItemsList extends Component {
     }
 }
 
-export default ItemsList;
+export default ProjectsList;
