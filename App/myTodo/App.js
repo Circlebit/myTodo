@@ -5,6 +5,9 @@ import NewItem from './screens/NewItem';
 import ProjectsList from './screens/ProjectsList'
 import { createDrawerNavigator, createStackNavigator, createAppContainer, DrawerItems } from 'react-navigation';
 import GlobalStyles from "./config/GlobalStyles";
+import Datastore from 'react-native-local-mongodb';
+
+global.db = new Datastore({ filename: 'asyncStorageKey', autoload: true });
 
 const CustomDrawerContentComponent = props => (
   <ScrollView>

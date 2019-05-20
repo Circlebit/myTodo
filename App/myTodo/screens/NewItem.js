@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const db = new Datastore();
+let allTodos;
 
 class NewItem extends Component {
     state = {
@@ -49,6 +49,18 @@ class NewItem extends Component {
         date: '',
     };
 
+    rerender = () => {
+        db.loadDatabase(()=>{
+          db.find({  }, (err, docs) => {
+            if (err){
+              console.log(err);
+            } else {
+              allTodos = docs;
+              console.log("docs in rerender");
+            }
+          });
+        })
+      }
     
     handleAddPress = () => {
         console.log("Clicked " + this.state.title);
@@ -59,7 +71,7 @@ class NewItem extends Component {
             title: this.state.title
           };
       
-          db.insert(doc, (err, newDoc) => {   // Callback is optional
+          global.db.insert(doc, (err, newDoc) => {   // Callback is optional
             if (err){
               console.log(err);
             } else {
@@ -69,6 +81,9 @@ class NewItem extends Component {
             }
           });
         }
+
+        this.rerender();
+        console.log(allTodos);
       }
     
 

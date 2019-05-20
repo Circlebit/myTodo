@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Text, SafeAreaView, StyleSheet, Button } from "react-native";
+import { Text, SafeAreaView, StyleSheet, ScrollView, FlatList } from "react-native";
 import GlobalStyles from "../config/GlobalStyles";
 import ActionButton from 'react-native-action-button';
 import Datastore from 'react-native-local-mongodb';
-
-let db = new Datastore({ filename: 'asyncStorageKey', autoload: true });
+import ItemInList from '../components/ItemInList'
 
 const styles = StyleSheet.create({
     attribution: {
@@ -17,6 +16,11 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       backgroundColor: 'rgba(0,0,0,0.5)',
     },
+    list: {
+        flex: 1,
+        paddingTop: 20,
+        backgroundColor: '#F3F3F3',
+    },
   });
 
 class ItemsList extends Component {
@@ -28,14 +32,31 @@ class ItemsList extends Component {
         this.props.navigation.navigate('newItem');
     }
 
+    componentDidMount() {
+        global.db.find({  }, (err, docs) => {
+            if (err){
+            console.log(err);
+            } else {
+            this.setState({ allItems: docs });
+            console.log("docs in allItems");
+            console.log(this.state.allItems);
+            }
+        });       
+    }
+
     render() {
         return [
-            <SafeAreaView 
+            <SafeAreaView
                 style={GlobalStyles.droidSafeArea}
                 key="safe">
-                <Text key="helloworld">Hallo Welt!</Text>
+                <FlatList 
+                    style={styles.list}
+                    data={this.state.allItems}
+                    renderItem={({item}) => <ItemInList item={item} />}
+                    key={({item}) => item.id}
+                />
             </SafeAreaView>,
-            <ActionButton 
+            <ActionButton
                 key="addItemButton"
                 onPress={this.handleAddEvent}
                 buttonColor="rgba(231, 76, 60, 1)"
