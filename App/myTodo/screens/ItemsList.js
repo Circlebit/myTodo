@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Text, SafeAreaView, StyleSheet, Button } from "react-native";
 import GlobalStyles from "../config/GlobalStyles";
 import ActionButton from 'react-native-action-button';
+import Datastore from 'react-native-local-mongodb';
+
+let db = new Datastore({ filename: 'asyncStorageKey', autoload: true });
 
 const styles = StyleSheet.create({
     attribution: {
