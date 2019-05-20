@@ -6,6 +6,7 @@ import {
     TextInput,
     StyleSheet,
 } from 'react-native';
+import Datastore from 'react-native-local-mongodb';
 
 const styles = StyleSheet.create({
     fieldContainer: {
@@ -39,12 +40,37 @@ const styles = StyleSheet.create({
     }
 });
 
+const db = new Datastore();
+
 class NewItem extends Component {
     state = {
         id: this.id,
         title: null,
         date: '',
     };
+
+    
+    handleAddPress = () => {
+        console.log("Clicked " + this.state.title);
+    
+        if (this.state.title != ""){
+    
+          let doc = { 
+            title: this.state.title
+          };
+      
+          db.insert(doc, (err, newDoc) => {   // Callback is optional
+            if (err){
+              console.log(err);
+            } else {
+              console.log(newDoc);
+              this.setState({title: ""});
+              this.props.navigation.navigate('itemsList');
+            }
+          });
+        }
+      }
+    
 
     render() {
         return (
@@ -55,7 +81,7 @@ class NewItem extends Component {
                         placeholder="Aufgaben Titel"
                         spellCheck={false}
                         value={this.state.title}
-                        onChangeText={this.handleChangeTitle}
+                        onChangeText={(title) => this.setState({title})}
                     />
                 </View>
                 <TouchableHighlight 
