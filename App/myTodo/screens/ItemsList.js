@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Text, SafeAreaView, StyleSheet, ScrollView, FlatList } from "react-native";
 import GlobalStyles from "../config/GlobalStyles";
 import ActionButton from 'react-native-action-button';
-import ListItem from '../components/ListItem'
+import ListItem from '../components/ListItem';
+import { withNavigationFocus } from "react-navigation";
 
 const styles = StyleSheet.create({
     list: {
@@ -21,7 +22,7 @@ class ItemsList extends Component {
         this.props.navigation.navigate('newItem');
     }
 
-    componentDidMount() {
+    reloadItemsFromDb() {
         global.db.find({  }, (err, docs) => {
             if (err){
             console.log(err);
@@ -30,8 +31,22 @@ class ItemsList extends Component {
             console.log("docs in allItems");
             console.log(this.state.allItems);
             }
-        });       
+        });  
     }
+
+    componentDidMount() {
+        this.reloadItemsFromDb();
+        const { navigation } = this.props;
+        this.focusListener = navigation.addListener("didFocus", () => {
+            console.log("did Focus");
+            this.reloadItemsFromDb();
+        });     
+    }
+
+    componentWillUnmount() {
+        // Remove the event listener
+        this.focusListener.remove();
+      }
 
     render() {
         return [
@@ -41,8 +56,9 @@ class ItemsList extends Component {
                 <FlatList 
                     style={styles.list}
                     data={this.state.allItems}
-                    renderItem={({item}) => <ListItem item={item} />}
-                    key={({item}) => item.id}
+                    renderItem={({item}) => <ListItem 
+                        item={item} 
+                        key={item.id} />}
                 />
             </SafeAreaView>,
             <ActionButton
