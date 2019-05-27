@@ -3,6 +3,7 @@ import {
     Text,
     View,
     StyleSheet,
+    TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -31,12 +32,19 @@ const styles = StyleSheet.create({
 
 export default function ListItem({ item }) {
 
+    _onPress = () => {
+        console.log(item.Title + " getatscht")
+        //this.props.onPressItem(this.props.id);
+    };
+
     return (
-        <View style={styles.card}>
-            <View style={styles.cardHeader}>
-                <Text style={styles.title}>{item.title}</Text>
+        <TouchableOpacity onPress={this._onPress}>
+            <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                    <Text style={styles.title}>{item.title}</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
