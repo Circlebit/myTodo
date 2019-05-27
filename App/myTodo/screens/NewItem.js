@@ -55,8 +55,7 @@ class NewItem extends Component {
             if (err){
               console.log(err);
             } else {
-              allTodos = docs;
-              console.log("docs in rerender");
+              this.state.allTodos = docs;
             }
           });
         })
