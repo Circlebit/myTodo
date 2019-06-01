@@ -1,8 +1,7 @@
 class Item {
-    constructor() {
+    constructor(key) {
         console.log("constructor geht los:")
         this.title = "",
-        this.key = this._id,
         this.description = "",
         this.creationDate = null,
         this.doneDate = null,

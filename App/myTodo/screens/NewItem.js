@@ -48,7 +48,7 @@ class NewItem extends Component {
         // key: this.id,
         // title: null,
         // date: '',
-        item: new Item(this.id)
+        item: new Item()
     };
 
     rerender = () => {
