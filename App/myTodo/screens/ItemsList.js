@@ -34,7 +34,19 @@ class ItemsList extends Component {
         });  
     }
 
+    removeEverythingFromDb() {
+        global.db.remove({  }, { multi: true }, (err, numRemoved) => {
+            if (err){
+            console.log(err);
+            } else {
+            this.setState({ allItems: [] });
+            console.log(numRemoved + " Elemente gelöscht!"); // zhal funzt nit :(
+            }
+        });  
+    }
+
     componentDidMount() {
+        //this.removeEverythingFromDb();
         this.reloadItemsFromDb();
         const { navigation } = this.props;
         this.focusListener = navigation.addListener("didFocus", () => {

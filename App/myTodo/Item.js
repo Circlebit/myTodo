@@ -1,6 +1,6 @@
 class Item {
-    constructor(key) {
-        console.log("constructor geht los:")
+    constructor() {
+        //console.log("constructor geht los:")
         this.title = "",
         this.description = "",
         this.creationDate = null,
@@ -9,7 +9,7 @@ class Item {
         this.category = "",
         this.behaviour = behaviour.REMINDLATER,
         this.repeat = true
-        console.log(this);
+        //console.log(this);
     };
 }
 

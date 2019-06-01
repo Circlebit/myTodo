@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Item from '../Item'
 import Datastore from 'react-native-local-mongodb';
+import update from 'react-addons-update'; 
 
 const styles = StyleSheet.create({
     fieldContainer: {
@@ -100,12 +101,10 @@ class NewItem extends Component {
                         placeholder="Aufgaben Titel"
                         spellCheck={false}
                         value={this.state.item.title}
-                        onChangeText={(title) => this.setState(prevState => ({
-                          item: {
-                              ...prevState.item.title,
-                              title: title
-                          }
-                      }))}
+                        onChangeText={(title) => this.setState({
+                          item: update(this.state.item, {title: {$set: title}})
+                          })
+                        }
                     />
                 </View>
                 <TouchableHighlight 
