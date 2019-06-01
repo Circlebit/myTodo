@@ -6,6 +6,7 @@ import {
     TextInput,
     StyleSheet,
 } from 'react-native';
+import Item from '../Item'
 import Datastore from 'react-native-local-mongodb';
 
 const styles = StyleSheet.create({
@@ -44,12 +45,15 @@ let allTodos;
 
 class NewItem extends Component {
     state = {
-        id: this.id,
-        title: null,
-        date: '',
+        // key: this.id,
+        // title: null,
+        // date: '',
+        item: new Item(this.id)
     };
 
     rerender = () => {
+      console.log("rerender");
+      console.log(this.state);
         db.loadDatabase(()=>{
           db.find({  }, (err, docs) => {
             if (err){
@@ -62,19 +66,20 @@ class NewItem extends Component {
       }
     
     handleAddPress = () => {
-        console.log("Clicked " + this.state.title);
+        console.log("Clicked " + this.state.item.title);
     
-        if (this.state.title != ""){
+        if (this.state.item.title != ""){
     
-          let doc = { 
-            title: this.state.title
-          };
+          // let doc = { 
+          //   title: this.state.item.title
+          // };
       
-          global.db.insert(doc, (err, newDoc) => {   // Callback is optional
+          global.db.insert(this.state.item, (err, newDoc) => {   // Callback is optional
             if (err){
               console.log(err);
             } else {
               console.log(newDoc);
+              console.log(this.state.item);
               this.setState({title: ""});
               this.props.navigation.navigate('itemsList');
             }
@@ -87,15 +92,20 @@ class NewItem extends Component {
     
 
     render() {
-        return (
+         return (
             <View style={{flex: 1}}>
                 <View style={styles.fieldContainer}>
                     <TextInput 
                         style={styles.text}
                         placeholder="Aufgaben Titel"
                         spellCheck={false}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({title})}
+                        value={this.state.item.title}
+                        onChangeText={(title) => this.setState(prevState => ({
+                          item: {
+                              ...prevState.item.title,
+                              title: title
+                          }
+                      }))}
                     />
                 </View>
                 <TouchableHighlight 

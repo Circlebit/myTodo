@@ -1,6 +1,8 @@
 class Item {
     constructor() {
+        console.log("constructor geht los:")
         this.title = "",
+        this.key = this._id,
         this.description = "",
         this.creationDate = null,
         this.doneDate = null,
@@ -8,6 +10,7 @@ class Item {
         this.category = "",
         this.behaviour = behaviour.REMINDLATER,
         this.repeat = true
+        console.log(this);
     };
 }
 
@@ -15,3 +18,5 @@ const behaviour = {
     REMINDLATER: 'remindlater', // einfach später neu erinnern
     STACK: 'stack', // Kopie anlegen
 }
+
+export default Item;

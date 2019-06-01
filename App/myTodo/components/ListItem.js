@@ -5,7 +5,6 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
     card: {
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
 export default function ListItem({ item }) {
 
     _onPress = () => {
-        console.log(item.Title + " getatscht")
+        console.log(item.title + " getatscht")
         //this.props.onPressItem(this.props.id);
     };
 
@@ -47,9 +46,3 @@ export default function ListItem({ item }) {
         </TouchableOpacity>
     );
 }
-
-ListItem.propTypes = {
-    item: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-    }),
-};

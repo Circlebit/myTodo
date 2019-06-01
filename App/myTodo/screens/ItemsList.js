@@ -57,8 +57,8 @@ class ItemsList extends Component {
                     style={styles.list}
                     data={this.state.allItems}
                     renderItem={({item}) => <ListItem 
-                        item={item} 
-                        key={item.id} />}
+                        item={item} />}
+                    keyExtractor={(item) => item._id}
                 />
             </SafeAreaView>,
             <ActionButton
