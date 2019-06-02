@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     Text,
     View,
@@ -6,6 +6,8 @@ import {
     StyleSheet,
     TouchableHighlight
 } from 'react-native';
+import Item from '../Item'
+import update from 'react-addons-update';
 
 const styles = StyleSheet.create({
     fieldContainer: {
@@ -39,31 +41,52 @@ const styles = StyleSheet.create({
     }
 });
 
-
-export default function ItemDetails({ item }) {
+class ItemDetails extends Component {
     state = {
-        id: this.id,
-        title: null,
-        date: '',
+        item: this.props.item,
     };
 
-    return (
-        <View style={{ flex: 1 }}>
-            <View style={styles.fieldContainer}>
-                <TextInput
-                    style={styles.text}
-                    placeholder="Aufgaben Titel"
-                    spellCheck={false}
-                    value={this.state.title}
-                    onChangeText={(title) => this.setState({ title })}
-                />
+    handleSavePress = () => {
+        console.log("Saving " + this.state.item.title);
+        if (this.state.item.title != "") {
+            global.db.insert(this.state.item, (err, newDoc) => {   // Callback is optional
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(newDoc);
+                    console.log(this.state.item);
+                    this.setState({ title: "" });
+                    this.props.navigation.navigate('itemsList');
+                }
+            });
+        }
+    }
+
+    render() {
+        return (
+            <View style={{ flex: 1 }}>
+                <View style={styles.fieldContainer}>
+                    <TextInput
+                        style={styles.text}
+                        placeholder="Aufgaben Titel"
+                        spellCheck={false}
+                        value={this.state.item.title}
+                        onChangeText={(title) => this.setState({
+                            item: update(this.state.item, { title: { $set: title } })
+                        })
+                        }
+                    />
+                </View>
+                <TouchableHighlight
+                    onPress={this.handleSavePress}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Speichern</Text>
+                </TouchableHighlight>
             </View>
-            <TouchableHighlight
-                onPress={this.handleAddPress}
-                style={styles.button}
-            >
-                <Text style={styles.buttonText}>Hinzufügen</Text>
-            </TouchableHighlight>
-        </View>
-    );
+        );
+    }
+
 };
+
+export default ItemDetails;
