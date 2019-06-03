@@ -3,8 +3,8 @@ import {
     Text,
     View,
     StyleSheet,
+    TouchableOpacity
 } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
     card: {
@@ -39,9 +39,3 @@ export default function ListItem({ item }) {
         </View>
     );
 }
-
-ListItem.propTypes = {
-    item: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-    }),
-};
