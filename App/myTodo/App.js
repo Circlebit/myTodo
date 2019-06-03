@@ -42,7 +42,7 @@ const itemsStack = createStackNavigator(
     editItem: 
     { 
       screen: EditItem,
-      navigationOptions: (item) => ({
+      navigationOptions: () => ({
         title: 'Aufgabe bearbeiten...',
       }),
     }

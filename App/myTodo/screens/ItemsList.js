@@ -67,10 +67,10 @@ class ItemsList extends Component {
         this.focusListener.remove();
     }
 
-    _onPress = (pressedItem) => {
-        console.log(pressedItem.title + " getatscht")
-        console.log(pressedItem);
-        this.props.navigation.navigate('editItem', { item }, )
+    _onPress = (item) => {
+        console.log(item.title + " getatscht")
+        console.log(item);
+        this.props.navigation.navigate('editItem', { item })
     };
 
     render() {

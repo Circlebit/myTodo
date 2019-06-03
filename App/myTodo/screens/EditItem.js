@@ -16,10 +16,13 @@ class EditItem extends Component {
 
   render() {
     console.log("### der FRAGLICHE: ");
+    console.log(this.props.navigation.state.params.item);
     console.log(this.state.item);
     return (
       <View style={{ flex: 1 }}>
-        <ItemDetails item={this.state.item} navigation={this.props.navigation}/>
+        <ItemDetails 
+          item={this.state.item} 
+          navigation={this.props.navigation}/>
       </View>
     );
   }

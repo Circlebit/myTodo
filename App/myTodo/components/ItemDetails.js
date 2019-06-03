@@ -48,18 +48,19 @@ class ItemDetails extends Component {
 
     handleSavePress = () => {
         console.log("Saving " + this.state.item.title);
-        if (this.state.item.title != "") {
-            global.db.insert(this.state.item, (err, newDoc) => {   // Callback is optional
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(newDoc);
-                    console.log(this.state.item);
-                    this.setState({ title: "" });
-                    this.props.navigation.navigate('itemsList');
-                }
-            });
-        }
+
+        global.db.update({ _id: this.state.item._id }, this.state.item, { upsert: true }, (err, newDoc) => {   // Callback is optional
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("### Es wurde upserted!");
+                console.log(newDoc);
+                //console.log(this.state.item);
+                //this.setState({ title: "" });
+                this.props.navigation.navigate('itemsList');
+            }
+        });
+
     }
 
     render() {
