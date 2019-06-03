@@ -31,18 +31,11 @@ const styles = StyleSheet.create({
 
 export default function ListItem({ item }) {
 
-    _onPress = () => {
-        console.log(item.title + " getatscht")
-        //this.props.onPressItem(this.props.id);
-    };
-
     return (
-        <TouchableOpacity onPress={this._onPress}>
-            <View style={styles.card}>
-                <View style={styles.cardHeader}>
-                    <Text style={styles.title}>{item.title}</Text>
-                </View>
+        <View style={styles.card}>
+            <View style={styles.cardHeader}>
+                <Text style={styles.title}>{item.title}</Text>
             </View>
-        </TouchableOpacity>
+        </View>
     );
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 import ItemsList from './screens/ItemsList';
 import NewItem from './screens/NewItem';
+import EditItem from './screens/EditItem';
 import ProjectsList from './screens/ProjectsList'
 import { createDrawerNavigator, createStackNavigator, createAppContainer, DrawerItems } from 'react-navigation';
 import GlobalStyles from "./config/GlobalStyles";
@@ -36,6 +37,13 @@ const itemsStack = createStackNavigator(
       screen: NewItem,
       navigationOptions: () => ({
         title: 'Neue Aufgabe...',
+      }),
+    },
+    editItem: 
+    { 
+      screen: EditItem,
+      navigationOptions: (item) => ({
+        title: 'Aufgabe bearbeiten...',
       }),
     }
   }
