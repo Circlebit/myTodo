@@ -2,6 +2,7 @@ class Item {
     constructor() {
         //console.log("constructor geht los:")
         this.title = "",
+        this.done = false,
         this.description = "",
         this.creationDate = null,
         this.doneDate = null,

@@ -38,7 +38,16 @@ class NewItem extends Component {
     };
 
     onCheckboxChange = () => {
-        this.setState({item: update(this.state.item, { done: { $set: !this.state.item.done }})})
+        let newDoneState = !this.state.item.done;
+        this.state.item.done = newDoneState;
+        this.setState({item: update(this.state.item, { done: { $set: newDoneState }})});
+        global.db.update({ _id: this.state.item._id }, this.state.item, { upsert: false }, (err, newDoc) => {   // Callback is optional
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("### done state in db gesaved " + this.state.item.title + ": " + this.state.item.done);
+            }
+        });
     };
 
     render() {
