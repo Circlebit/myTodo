@@ -48,24 +48,24 @@ class ItemDetails extends Component {
 
     handleSavePress = () => {
         console.log("::: Saving " + this.state.item.title);
-        if(this.state.item.creationDate == null){
+        if (this.state.item.creationDate == null) {
             this.state.item.creationDate = new Date();
         }
         console.log(":::");
         console.log(this.state.item);
         console.log(":::\n");
 
-        global.db.update({ _id: this.state.item._id }, 
-            this.state.item, 
+        global.db.update({ _id: this.state.item._id },
+            this.state.item,
             { upsert: true }, (err, newDoc) => {   // Callback is optional
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("### Es wurde upserted!");
-                console.log(newDoc);
-                this.props.navigation.navigate('itemsList');
-            }
-        });
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("### Es wurde upserted!");
+                    console.log(newDoc);
+                    this.props.navigation.navigate('itemsList');
+                }
+            });
 
     }
 
@@ -73,6 +73,7 @@ class ItemDetails extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <View style={styles.fieldContainer}>
+                    <Text style={styles.text}>Titel:</Text>
                     <TextInput
                         style={styles.text}
                         placeholder="Aufgaben Titel"
@@ -80,14 +81,24 @@ class ItemDetails extends Component {
                         value={this.state.item.title}
                         onChangeText={(title) => this.setState({
                             item: update(this.state.item, { title: { $set: title } })
-                        })
-                        }
-                    />
+                        })} />
+                    <TextInput
+                        style={[styles.text, {height: Math.max(35, this.state.height)}]}
+                        placeholder="Beschreibung"
+                        spellCheck={true}
+                        multiline={true}
+                        numberOfLines={4}
+                        value={this.state.item.description}
+                        onChangeText={(description) => this.setState({
+                            item: update(this.state.item, { description: { $set: description } })
+                        })} 
+                        onContentSizeChange={(event) => {
+                            this.setState({ height: event.nativeEvent.contentSize.height })
+                        }}/>
                 </View>
                 <TouchableHighlight
                     onPress={this.handleSavePress}
-                    style={styles.button}
-                >
+                    style={styles.button}>
                     <Text style={styles.buttonText}>Speichern</Text>
                 </TouchableHighlight>
             </View>
