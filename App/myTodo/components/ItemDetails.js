@@ -11,15 +11,21 @@ import update from 'react-addons-update';
 
 const styles = StyleSheet.create({
     fieldContainer: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
         marginTop: 20,
         marginBottom: 20,
         backgroundColor: '#fff',
     },
     text: {
-        height: 40,
+        // height: 40,
         margin: 0,
         marginRight: 7,
         paddingLeft: 10,
+    },
+    header: {
+        fontWeight: 'bold',
     },
     button: {
         height: 50,
@@ -73,7 +79,7 @@ class ItemDetails extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <View style={styles.fieldContainer}>
-                    <Text style={styles.text}>Titel:</Text>
+                    <Text style={[styles.text, styles.header]}>Titel:</Text>
                     <TextInput
                         style={styles.text}
                         placeholder="Aufgaben Titel"
@@ -82,8 +88,11 @@ class ItemDetails extends Component {
                         onChangeText={(title) => this.setState({
                             item: update(this.state.item, { title: { $set: title } })
                         })} />
+                </View>
+                <View style={styles.fieldContainer}>
+                    <Text style={[styles.text, styles.header]}>Beschreibung:</Text>
                     <TextInput
-                        style={[styles.text, {height: Math.max(35, this.state.height)}]}
+                        style={[styles.text, { height: Math.max(35, this.state.height) }]}
                         placeholder="Beschreibung"
                         spellCheck={true}
                         multiline={true}
@@ -91,10 +100,10 @@ class ItemDetails extends Component {
                         value={this.state.item.description}
                         onChangeText={(description) => this.setState({
                             item: update(this.state.item, { description: { $set: description } })
-                        })} 
+                        })}
                         onContentSizeChange={(event) => {
                             this.setState({ height: event.nativeEvent.contentSize.height })
-                        }}/>
+                        }} />
                 </View>
                 <TouchableHighlight
                     onPress={this.handleSavePress}
