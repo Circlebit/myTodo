@@ -24,12 +24,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
     },
-    title: {
-        fontSize: 15,
-        fontWeight: '300',
-        marginLeft: 7,
-        textAlign: 'left',
-    },
 });
 
 class NewItem extends Component {
@@ -40,7 +34,7 @@ class NewItem extends Component {
     onCheckboxChange = () => {
         let newDoneState = !this.state.item.done;
         this.state.item.done = newDoneState;
-        this.setState({item: update(this.state.item, { done: { $set: newDoneState }})});
+        this.setState({ item: update(this.state.item, { done: { $set: newDoneState } }) });
         global.db.update({ _id: this.state.item._id }, this.state.item, { upsert: false }, (err, newDoc) => {   // Callback is optional
             if (err) {
                 console.log(err);
@@ -50,14 +44,33 @@ class NewItem extends Component {
         });
     };
 
+    headerStyle = () => {
+        let style = {
+            fontSize: 15,
+            fontWeight: 'bold',
+            marginLeft: 7,
+            textAlign: 'left',
+        }
+        if (!this.state.item.done) {
+            return style;
+        }
+        else {
+            return [style,
+                {
+                    textDecorationLine: 'line-through',
+                    color: 'grey'
+                }]
+        }
+    }
+
     render() {
         return (
             <View style={styles.card}>
                 <View style={styles.cardHeader}>
-                    <CheckBox 
-                        value={this.state.item.done} 
+                    <CheckBox
+                        value={this.state.item.done}
                         onValueChange={this.onCheckboxChange} />
-                    <Text style={styles.title}>{this.state.item.title}</Text>
+                    <Text style={this.headerStyle()}>{this.state.item.title}</Text>
                 </View>
             </View>
         )
