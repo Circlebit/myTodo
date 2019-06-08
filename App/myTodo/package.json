@@ -12,6 +12,7 @@
     "react-addons-update": "^15.6.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-action-button": "^2.8.5",
+    "react-native-datepicker": "^1.7.2",
     "react-native-local-mongodb": "^2.2.9",
     "react-navigation": "^3.9.1"
   },

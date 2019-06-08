@@ -4,10 +4,13 @@ import {
     View,
     TextInput,
     StyleSheet,
-    TouchableHighlight
+    TouchableHighlight,
+    CheckBox
 } from 'react-native';
 import Item from '../Item'
 import update from 'react-addons-update';
+import Icon from 'react-native-vector-icons/Ionicons';
+import DatePicker from 'react-native-datepicker'
 
 const styles = StyleSheet.create({
     fieldContainer: {
@@ -17,6 +20,11 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
         backgroundColor: '#fff',
+    },
+    horizontalContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
     },
     text: {
         // height: 40,
@@ -75,6 +83,19 @@ class ItemDetails extends Component {
 
     }
 
+    onDueDateCheckboxChange = () => {
+        let newHasDueDateState = !this.state.item.hasDueDate;
+        this.state.item.hasDueDate = newHasDueDateState;
+        this.setState({item: update(this.state.item, { hasDueDate: { $set: newHasDueDateState }})});
+        // global.db.update({ _id: this.state.item._id }, this.state.item, { upsert: false }, (err, newDoc) => {   // Callback is optional
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         console.log("### done state in db gesaved " + this.state.item.title + ": " + this.state.item.done);
+        //     }
+        // });
+    };
+
     render() {
         return (
             <View style={{ flex: 1 }}>
@@ -105,12 +126,47 @@ class ItemDetails extends Component {
                             this.setState({ height: event.nativeEvent.contentSize.height })
                         }} />
                 </View>
+                <View style={styles.fieldContainer}>
+                    <View style={styles.horizontalContainer}>
+                        <CheckBox
+                            value={this.state.item.hasDueDate}
+                            onValueChange={this.onDueDateCheckboxChange} />
+                        <Text style={[styles.text, styles.header]}>erledigen bis:</Text>
+                    </View>
+                    <DatePicker
+                        style={{ width: 200 }}
+                        date={this.state.item.dueDate}
+                        mode="date"
+                        placeholder="select date"
+                        format="dd, DD.MM.YYYY"
+                        minDate="2016-05-01"
+                        maxDate="2020-06-01"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            // ... You can check the source to find the other keys.
+                        }}
+                        //onDateChange={(date) => { this.setState({ date: date }) }}
+                        onDateChange={(date) => this.setState({
+                            item: update(this.state.item, { dueDate: { $set: date } })
+                        })}
+                    />
+                </View>
                 <TouchableHighlight
                     onPress={this.handleSavePress}
                     style={styles.button}>
                     <Text style={styles.buttonText}>Speichern</Text>
                 </TouchableHighlight>
-            </View>
+            </View >
         );
     }
 

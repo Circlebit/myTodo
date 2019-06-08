@@ -6,7 +6,8 @@ class Item {
         this.description = "",
         this.creationDate = null,
         this.doneDate = null,
-        this.dueDate = null,
+        this.dueDate = new Date(),
+        this.hasDueDate = false,
         this.category = "",
         this.behaviour = behaviour.REMINDLATER,
         this.repeat = true
