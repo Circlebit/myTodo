@@ -138,7 +138,7 @@ class ItemDetails extends Component {
                         date={this.state.item.dueDate}
                         mode="date"
                         placeholder="select date"
-                        format="dd, DD.MM.YYYY"
+                        //format="dd, DD.MM.YYYY"
                         minDate="2016-05-01"
                         maxDate="2020-06-01"
                         confirmBtnText="Confirm"
@@ -156,9 +156,13 @@ class ItemDetails extends Component {
                             // ... You can check the source to find the other keys.
                         }}
                         //onDateChange={(date) => { this.setState({ date: date }) }}
-                        onDateChange={(date) => this.setState({
-                            item: update(this.state.item, { dueDate: { $set: date } })
-                        })}
+                        onDateChange={(date) => {
+                            let parsedDate = new Date(date);
+                            this.setState({
+                            item: update(this.state.item, { dueDate: { $set: parsedDate } })
+                            })
+                        }
+                    }
                     />
                 </View>
                 <TouchableHighlight

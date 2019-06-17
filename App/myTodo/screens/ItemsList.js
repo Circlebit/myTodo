@@ -34,7 +34,26 @@ class ItemsList extends Component {
             if (err) {
                 console.log(err);
             } else {
-                this.setState({ allItems: docs });
+                let sortedDocs;
+                sortedDocs = docs.sort((a, b) => {
+
+                    if(a.hasDueDate && (!b.hasDueDate || a.dueDate > b.dueDate) || !b.hasDueDate && a.creationDate > b.creationDate) {
+                        console.log("to return 1 for " +  a.title + " and " + b.title)
+                        return 1;
+                    }
+                    else if(b.hasDueDate && (!a.hasDueDate || a.dueDate < b.dueDate) || !a.hasDueDate && a.creationDate < b.creationDate){
+                        console.log("to return -1 for " +  a.title + " and " + b.title)
+                        return -1;
+                    }
+                    else {
+                        console.log("to return 0 for " +  a.title + " and " + b.title)
+                        return 0;
+                    }
+
+                })
+                //console.log("sortedDocs:");
+                //console.log(sortedDocs);
+                this.setState({ allItems: sortedDocs });
                 console.log("docs in allItems");
                 console.log(this.state.allItems);
             }
